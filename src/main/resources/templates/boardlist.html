@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+</head>
+
+<style>
+  .layout{
+    width : 500px;
+    margin : 0 auto;
+    margin-top : 40px;
+  }
+</style>
+
+<body>
+  <div class="layout">
+    <table>
+        <thead>
+          <tr>
+            <th>글번호</th>
+            <th>제목</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="board : ${list}"> <!--반복문. 보드전체를 출력-->
+            <td th:text="${board.id}">글번호</td>
+            <td><a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}">제목</a></td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</body>
+</html>
