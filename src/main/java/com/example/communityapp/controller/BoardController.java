@@ -24,9 +24,11 @@ public class BoardController {
     public String boardWriteProcess(Board board,Model model){
 
         boardService.write(board);
-        model.addAttribute("list",boardService.boardList());
 
-        return "boardlist";
+        model.addAttribute("message","글이 작성되었습니다.");
+        model.addAttribute("searchUrl","/board/list");
+
+        return "message";
     }
 
     @GetMapping("/board/list")
@@ -55,14 +57,15 @@ public class BoardController {
     }
 
     @PostMapping("/board/update/{id}")
-    public String boardUpdate(@PathVariable("id") Integer id,Board board){
+    public String boardUpdate(@PathVariable("id") Integer id,Board board,Model model){
         Board tempBoard = boardService.view(id); //수정하기 이전의 보드 객체를 생성함
         tempBoard.setTitle(board.getTitle());
         tempBoard.setContent(board.getContent()); //수정된 내용의 보드를 덮어씌
-
         boardService.write(tempBoard);
+        model.addAttribute("message","글이 수정되었습니다");
+        model.addAttribute("searchUrl","/board/view?id="+id);
 
-        return "boardview";
+        return "message";
     }
 
 
