@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,11 +21,12 @@ public class BoardController {
     }
 
     @PostMapping("/board/writeprocess")
-    public String boardWriteProcess(Board board){
+    public String boardWriteProcess(Board board,Model model){
 
         boardService.write(board);
+        model.addAttribute("list",boardService.boardList());
 
-        return "";
+        return "boardlist";
     }
 
     @GetMapping("/board/list")
@@ -45,6 +47,25 @@ public class BoardController {
         boardService.boardDelete(id);
         return "redirect:/board/list";
     }
+
+    @GetMapping("/board/modify/{id}")
+    public String boardModify(@PathVariable("id") Integer id,Model model){
+        model.addAttribute("board",boardService.view(id));
+        return "boardmodify";
+    }
+
+    @PostMapping("/board/update/{id}")
+    public String boardUpdate(@PathVariable("id") Integer id,Board board){
+        Board tempBoard = boardService.view(id); //수정하기 이전의 보드 객체를 생성함
+        tempBoard.setTitle(board.getTitle());
+        tempBoard.setContent(board.getContent()); //수정된 내용의 보드를 덮어씌
+
+        boardService.write(tempBoard);
+
+        return "boardview";
+    }
+
+
 
 
 }

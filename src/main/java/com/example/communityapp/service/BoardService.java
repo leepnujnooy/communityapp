@@ -33,4 +33,9 @@ public class BoardService {
     public void boardDelete(Integer id){
         boardRepository.deleteById(id);
     }
+
+    public void update(Board board){
+        boardRepository.save(board);
+    }
+
 }

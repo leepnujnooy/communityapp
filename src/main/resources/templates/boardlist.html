@@ -20,6 +20,7 @@
           <tr>
             <th>글번호</th>
             <th>제목</th>
+              <td><a th:href="@{/board/write}">게시글 작성하기</a></td>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
             <td th:text="${board.id}">글번호</td>
             <td><a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}">제목</a></td>
           </tr>
+
         </tbody>
     </table>
   </div>
