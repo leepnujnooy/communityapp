@@ -11,5 +11,30 @@
 <a th:href="@{/board/delete(id=${board.id})}">삭제하기</a>
 <a th:href="@{/board/modify/{id}(id=${board.id})}">수정하기</a>
 <a th:href="@{/board/list}">리스트로 돌아가기</a>
+
+<!--댓글출력부분-->
+<div>
+    <table>
+        <thead></thead>
+        <tbody>
+        <!--반복문. 보드전체를 출력-->
+        <!--<tr th:each="comment : ${commentList}">
+            <td th:text="${comment.id}"></td>
+            <td th:text="${comment.commentWriter}"></td>
+            <td th:text="${comment.commentContent}"></td>
+        </tr>-->
+        </tbody>
+    </table>
+
+</div>
+
+
+<!--댓글작성부분-->
+<!--<form action="/board/commentwriteprocess" method="post">
+    <input type="title" name="commentWriter" placeholder="작성자(익명)">
+    <input type="text" name="commentContent" placeholder="내용">
+    <input type="hidden" name="board_id" th:value="${board.id}">
+    <button type="submit">댓글작성</button>
+</form>-->
 </body>
 </html>

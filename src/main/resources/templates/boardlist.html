@@ -15,6 +15,7 @@
 
 <body>
   <div class="layout">
+      <h1>어딘가 이상한 커뮤니티</h1>
     <table>
         <thead>
           <tr>
@@ -26,11 +27,15 @@
         <tbody>
           <tr th:each="board : ${list}"> <!--반복문. 보드전체를 출력-->
             <td th:text="${board.id}">글번호</td>
-            <td><a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}">제목</a></td>
+            <td><a th:text="${board.title}" th:href="@{/board/view/{id}(id=${board.id})}">제목</a></td>
           </tr>
 
         </tbody>
     </table>
+      <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+          <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1})}" th:text="${page}"></a>
+          <strong th:if="${page == nowPage}" th:text="${page}" style="color:yellowgreen"></strong>
+      </th:block>
   </div>
 </body>
 </html>
