@@ -18,11 +18,10 @@
         <thead></thead>
         <tbody>
         <!--반복문. 보드전체를 출력-->
-        <!--<tr th:each="comment : ${commentList}">
-            <td th:text="${comment.id}"></td>
+        <tr th:each="comment : ${board.commentList}">
             <td th:text="${comment.commentWriter}"></td>
             <td th:text="${comment.commentContent}"></td>
-        </tr>-->
+        </tr>
         </tbody>
     </table>
 
@@ -30,11 +29,11 @@
 
 
 <!--댓글작성부분-->
-<!--<form action="/board/commentwriteprocess" method="post">
+<form th:action="@{/board/updateComment/{id}(id=${board.id})}" method="post">
     <input type="title" name="commentWriter" placeholder="작성자(익명)">
     <input type="text" name="commentContent" placeholder="내용">
     <input type="hidden" name="board_id" th:value="${board.id}">
     <button type="submit">댓글작성</button>
-</form>-->
+</form>
 </body>
 </html>
